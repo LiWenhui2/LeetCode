@@ -41,3 +41,33 @@ function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | nul
     }
     return dummy.next
 }
+
+//3. 无重复字符的最长子串
+function lengthOfLongestSubstring(s: string): number {
+    let left: number = 0
+    let maxLen: number = 0
+    const map: Map<string, number> = new Map()
+    for (let right = 0; right < s.length; right++) {
+        const char = s[right]
+        if (map.has(char) && map.get(char)! >= left) {
+            left = map.get(char)! + 1
+        }
+        map.set(char, right)
+        maxLen = Math.max(maxLen, right - left + 1)
+    }
+    return maxLen
+}
+
+//9. 回文数
+function isPalindrome(x: number): boolean {
+    // return x.toString() === x.toString().split('').reverse().join('')
+    if (x < 0 || (x >= 10 && (x % 10 === 0))) return false
+    if (x >= 0 && x <= 9) return true
+    let reverted: number = 0
+    let n: number = x
+    while (reverted < n) {
+        reverted = reverted * 10 + (n % 10)
+        n = Math.floor(n / 10)
+    }
+    return reverted === n || n === Math.floor(reverted / 10)
+}
