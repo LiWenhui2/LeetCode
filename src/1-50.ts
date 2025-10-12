@@ -71,3 +71,23 @@ function isPalindrome(x: number): boolean {
     }
     return reverted === n || n === Math.floor(reverted / 10)
 }
+
+//13. 罗马数字转整数
+function romanToInt(s: string): number {
+    let res: number = 0
+    const map: { [key: string]: number } = {I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000}
+    for (let i = 0; i < s.length; i++) {
+        const current: number = map[s[i]]
+        const next: number = map[s[i + 1]]
+        if (current < next) {
+            res += next - current
+            i++
+        } else {
+            res += current
+        }
+        console.log(res)
+    }
+    return res
+}
+
+console.log(romanToInt('III'))
