@@ -90,4 +90,90 @@ function romanToInt(s: string): number {
     return res
 }
 
-console.log(romanToInt('III'))
+// console.log(romanToInt('III'))
+//14. 最长公共前缀
+function longestCommonPrefix(strs: string[]): string {
+    let prefix: string = strs[0]
+    for (let i = 0; i < strs.length; i++) {
+        while (!strs[i].startsWith(prefix)) {
+            prefix = prefix.slice(0, -1)
+        }
+    }
+    return prefix
+}
+
+//20. 有效的括号
+function isValid(s: string): boolean {
+    if ([')', ']', '}'].includes(s[0])) return false
+    const map: { [key: string]: string } = {')': '(', ']': '[', '}': '{'}
+    const stack: string[] = []
+    for (let char of s) {
+        if (['(', '[', '{'].includes(char)) {
+            stack.push(char)
+        } else {
+            if (stack.pop() !== map[char])
+                return false
+        }
+    }
+    return stack.length === 0
+}
+
+//21. 合并两个有序链表
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): ListNode | null {
+    const dummy: ListNode = new ListNode(0)
+    let current = dummy
+    while (list1 !== null && list2 !== null) {
+        if (list1.val < list2.val) {
+            current.next = list1
+            list1 = list1.next
+        } else {
+            current.next = list2
+            list2 = list2.next
+        }
+        current = current.next
+    }
+    current.next = list1 === null ? list2 : list1
+    return dummy.next
+}
+
+//26. 删除有序数组中的重复项
+function removeDuplicates(nums: number[]): number {
+    let slow: number = 0
+    for (let fast = 1; fast < nums.length; fast++) {
+        if (nums[slow] !== nums[fast]) {
+            slow++
+            nums[slow] = nums[fast]
+        }
+    }
+    return slow + 1
+}
+
+//27. 移除元素
+function removeElement(nums: number[], val: number): number {
+    let left: number = 0
+    for (let right = 0; right < nums.length; right++) {
+        if (nums[right] !== val) {
+            nums[left] = nums[right]
+            left++
+        }
+    }
+    return left
+}
+
+//28. 找出字符串中第一个匹配项的下标
+function strStr(haystack: string, needle: string): number {
+    for (let i=0;i<haystack.length;i++){
+        for ()
+    }
+}
