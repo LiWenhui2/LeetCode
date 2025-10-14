@@ -173,7 +173,66 @@ function removeElement(nums: number[], val: number): number {
 
 //28. 找出字符串中第一个匹配项的下标
 function strStr(haystack: string, needle: string): number {
-    for (let i=0;i<haystack.length;i++){
-        for ()
+    for (let i = 0; i <= haystack.length - needle.length; i++) {
+        let j: number = 0
+        while (haystack[i + j] === needle[j] && j < needle.length) {
+            j++
+        }
+        console.log(j)
+        if (j === needle.length) {
+            return i
+        }
+    }
+    return -1
+}
+
+// console.log(strStr('a', 'a'))
+//35. 搜索插入位置
+function searchInsert(nums: number[], target: number): number {
+    let left: number = 0
+    let right: number = nums.length - 1
+    let middle: number = Math.floor((left + right) / 2)
+    while (left <= right) {
+        if (target > nums[middle]) {
+            left = middle + 1
+        } else if (target < nums[middle]) {
+            right = middle - 1
+        } else {
+            return middle
+        }
+        middle = Math.floor((left + right) / 2)
+    }
+    return left
+}
+
+// console.log(searchInsert([1, 3, 5, 6], 7))
+//58. 最后一个单词的长度
+function lengthOfLastWord(s: string): number {
+    // if (s === '') return 0
+    // const arr = s.trim().split(' ')
+    // return arr[arr.length - 1].length
+    let i: number = s.length - 1
+    let len: number = 0
+    while (i >= 0 && s[i] === ' ') {
+        i--
+    }
+    while (i >= 0 && s[i] !== ' ') {
+        i--
+        len++
+    }
+    return len
+}
+
+//66. 加一
+function plusOne(digits: number[]): number[] {
+    let flag: boolean = false
+    let i = digits.length - 1
+    while (i >= 0 && flag) {
+        if (digits[i] + 1 > 0) {
+            flag = true
+        }
+        
     }
 }
+
+plusOne([1, 2, 3])
