@@ -225,14 +225,60 @@ function lengthOfLastWord(s: string): number {
 
 //66. 加一
 function plusOne(digits: number[]): number[] {
-    let flag: boolean = false
-    let i = digits.length - 1
-    while (i >= 0 && flag) {
-        if (digits[i] + 1 > 0) {
-            flag = true
-        }
-        
+    let carry: number = 1
+    for (let i = digits.length - 1; i >= 0; i--) {
+        const temp: number = digits[i] + carry
+        digits[i] = temp % 10
+        if (temp >= 10) {
+            carry = 1
+        } else carry = 0
     }
+    if (carry === 1) digits.unshift(1)
+    return digits
 }
 
-plusOne([1, 2, 3])
+// console.log(plusOne([9]))
+
+//67. 二进制求和
+function addBinary(a: string, b: string): string {
+    let res: number[] = []
+    let i: number = a.length - 1
+    let j: number = b.length - 1
+    let carry: number = 0
+    while (i >= 0 || j >= 0 || carry > 0) {
+        const bitA: number = i >= 0 ? Number(a[i]) : 0
+        const bitB: number = j >= 0 ? Number(b[j]) : 0
+        res.unshift((bitA + bitB + carry) % 2)
+        carry = Math.floor((bitA + bitB + carry) / 2)
+        i--
+        j--
+    }
+    // console.log(res)
+    return res.join('')
+}
+
+// console.log(addBinary('11', '1'))
+//69. x 的平方根
+function mySqrt(x: number): number {
+    // return Math.floor(Math.sqrt(x))
+    let left: number = 0
+    let right: number = x
+    while (left <= right) {
+        const mid: number = Math.floor((left + right) / 2)
+        const square: number = mid * mid
+        if (square == x) return mid
+        else if (square > x) {
+            right = mid - 1
+            // left++
+        } else {
+            left = mid + 1
+        }
+    }
+    return right
+}
+
+// console.log(mySqrt(4))
+//70. 爬楼梯
+function climbStairs(n: number): number {
+    
+}
