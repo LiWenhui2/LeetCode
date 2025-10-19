@@ -280,5 +280,77 @@ function mySqrt(x: number): number {
 // console.log(mySqrt(4))
 //70. 爬楼梯
 function climbStairs(n: number): number {
+    if (n <= 2) return n
+    const dp: number[] = new Array(n)
+    dp[0] = 1
+    dp[1] = 2
+    for (let i = 2; i < dp.length; i++) {
+        dp[i] = dp[i - 1] + dp[i - 2]
+    }
+    return dp[n - 1]
+}
+
+// console.log(climbStairs(3))
+//83. 删除排序链表中的重复元素
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+function deleteDuplicates(head: ListNode | null): ListNode | null {
+    let current = head
+    while (current != null && current.next != null) {
+        if (current.val == current.next.val) {
+            current.next = current.next.next
+        } else {
+            current = current.next
+        }
+    }
+    return head
+}
+
+//88. 合并两个有序数组
+/**
+ Do not return anything, modify nums1 in-place instead.
+ */
+function merge(nums1: number[], m: number, nums2: number[], n: number): void {
+    let p1: number = m - 1
+    let p2: number = n - 1
+    let p: number = m + n - 1
+    while (p2 >= 0) {
+        if (nums1[p1] > nums2[p2]) {
+            nums1[p] = nums1[p1]
+            p1--
+        } else {
+            nums1[p] = nums2[p2]
+            p2--
+        }
+        p--
+    }
+}
+
+//94. 二叉树的中序遍历
+
+class TreeNode {
+    val: number
+    left: TreeNode | null
+    right: TreeNode | null
+
+    constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
+        this.val = (val === undefined ? 0 : val)
+        this.left = (left === undefined ? null : left)
+        this.right = (right === undefined ? null : right)
+    }
+}
+
+
+function inorderTraversal(root: TreeNode | null): number[] {
     
 }
